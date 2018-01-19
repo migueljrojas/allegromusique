@@ -37,5 +37,33 @@ body
         
         script(src="//cdnjs.cloudflare.com/ajax/libs/wow/0.1.12/wow.min.js")
         script new WOW().init();
+        script
+            |jQuery(document).ready(function () {
+            |    
+            |    //Contact Form
+            |   var form = jQuery('#home-contact');
+            |   var success =
+            |       '<p class="h1">Merci pour nous contacter!</p><p class="h3">Nous répondrons sous peu :)</p>';
+            |   if(window.location.href.indexOf("sent") > -1) {
+            |       form.addClass('-result');
+            |       form.html(success);
+            |       jQuery("html, body").animate({ scrollTop: jQuery(document).height() }, 1000);
+            |   }
+            |   
+            |   //Inscription Form
+            |   document.getElementById("btn-finaliser").onclick = function() {
+            |       document.getElementById("inscriptions-form").submit();
+            |   }
+            |   
+            |   var form2 = jQuery('#inscriptions-form');
+            |   var success2 =
+            |       '<p class="h1">Merci pour votre inscription!</p><p class="h3">Nous répondrons sous peu :)</p>';
+            |   if(window.location.href.indexOf("envoye") > -1) {
+            |       form2.addClass('-result');
+            |       form2.html(success2);
+            |       var position = jQuery('#inscriptions').offset().top;
+            |       jQuery("html, body").animate({ scrollTop: position }, 1000);
+            |   }
+            |});
 
 </html>

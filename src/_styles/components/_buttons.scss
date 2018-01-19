@@ -1,19 +1,18 @@
 a._button,
 button._button,
 ._button {
-    background: $link;
+    background: $cta;
     color: $white;
     display: inline-block;
     font-family: $mainFont;
     font-size: $xs;
-    font-weight: 700;
+    font-weight: 800;
     height: $base;
     line-height: $base;
-    max-width: 300px;
     padding: 0 40px;
     text-align: center;
     transition: all $duration $easingLight;
-    border-radius: $radius;
+    text-transform: uppercase;
 
     &:hover{
         background: $linkHover;
@@ -26,8 +25,19 @@ button._button,
         color: $black;
 
         &:hover{
-            color: $blue;
+            color: $mainColor;
             background: $white;
+            padding: 0 40px;
+        }
+    }
+
+    &.-orange {
+        background: $orange;
+        color: $white;
+
+        &:hover{
+            color: $white;
+            background: $orange - #333;
             padding: 0 40px;
         }
     }
@@ -41,7 +51,7 @@ button._button,
         font-family: $mainFont;
 
         &:hover{
-            background: $blue;
+            background: $cta;
             padding: 0 40px;
         }
     }
@@ -49,7 +59,7 @@ button._button,
     &.-large {
         height: $base*1.5;
         line-height: $base*1.5;
-        font-size: 24px;
+        font-size: 21px;
     }
 
     &.-small {
@@ -62,7 +72,7 @@ button._button,
         background: $black;
 
         &:hover{
-            color: $blue;
+            color: $mainColor;
             background: $black;
             padding: 0 60px;
         }

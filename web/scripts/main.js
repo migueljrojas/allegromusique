@@ -14666,17 +14666,52 @@ var Header = function() {
     var header = $('.header');
     var body = $('body');
     var menuOpen = $('.header__hamburguer');
-    var menuClose = $('.header__nav__close');
+    var menuItem = $('.header__menu a');
 
     menuOpen.on('click', function(){
-        header.addClass('-open');
-        body.addClass('-hideOverflow');
+        header.toggleClass('-open');
+        body.toggleClass('-hideOverflow');
     });
 
-    menuClose.on('click', function(){
+    menuItem.on('click', function(){
         header.removeClass('-open');
         body.removeClass('-hideOverflow');
     });
+
+    // Select all links with hashes
+$('a[href="#"]').click(function(e){
+    e.preventDefault();
+});
+
+$('a[href*="#"]')
+  // Remove links that don't actually link to anything
+  .not('[href="#"]')
+  .not('[href="#0"]')
+  .click(function(event) {
+    // On-page links
+    if (
+      location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
+      &&
+      location.hostname == this.hostname
+    ) {
+      // Figure out element to scroll to
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+      // Does a scroll target exist?
+      if (target.length) {
+        // Only prevent default if animation is actually gonna happen
+        event.preventDefault();
+        $('html, body').animate({
+          scrollTop: target.offset().top + -80
+        }, 1000, function() {
+          // Callback after animation
+          // Must change focus!
+          var $target = $(target);
+          $target.focus();
+        });
+      }
+    }
+  });
 };
 
 module.exports = Header;
@@ -14702,6 +14737,189 @@ var Slider = function() {
 module.exports = Slider;
 
 },{}],7:[function(require,module,exports){
+'use strict';
+
+var Home = function() {
+    var course = $('.home__cours__item');
+
+    if (course.length) {
+
+        var selectors = $('[data-target]');
+        var tabs = $('[data-tab]');
+        var courseDesc = '.home__cours__item__desc';
+        var courseDescExpand = $('.home__cours__item__desc__show');
+
+        function init() {
+            selectors.first().addClass('-active');
+            tabs.first().addClass('-active');
+        }
+
+        if ( selectors && tabs ) {
+
+            selectors.each(function(){
+                $(this).on('click',function(){
+                    var dataTarget = $(this).data('target');
+
+                    selectors.removeClass('-active');
+                    $(this).addClass('-active');
+
+                    tabs.removeClass('-active');
+                    tabs.filter(function() {
+                        return $(this).data('tab') == dataTarget;
+                    }).addClass('-active');
+                });
+            });
+
+            init();
+        }
+
+        courseDescExpand.on('click', function() {
+            var $this = $(this);
+            var height = $this.siblings('p').outerHeight();
+            var height = (height + 30) + 'px';
+            var container = $this.parents(courseDesc);
+
+            if (!container.hasClass('-open')) {
+                container.css('max-height', height);
+                container.addClass('-open');
+            } else {
+                container.css('max-height', '70px');
+                container.removeClass('-open');
+            }
+        });
+    }
+
+
+    // Inscriptions form
+    var inscriptionForm = $("#inscriptions-form");
+    var breadcrumbStep = $('[data-index]');
+
+    function nextBreadcrumbStep() {
+        var current =  breadcrumbStep.filter(function(){
+            return $(this).hasClass('-current');
+        });
+        var index = current.data('index');
+        breadcrumbStep.removeClass('-current');
+        breadcrumbStep.filter(function() {
+            return $(this).data('index') == index + 1;
+        }).addClass('-current');
+    }
+
+    
+    //Step One Validation
+    var stepOne = $('[data-step="0"]');
+    var stepOneInputs = stepOne.find('input');
+    var stepOneCta = stepOne.find('.home__inscriptions__form__cta');
+    var stepOnevalidLimit = stepOneInputs.length;
+    var stepOneinputCount = 0;
+
+
+    function stepOneValidity() {
+        if (stepOneinputCount === stepOnevalidLimit - 1) {
+            stepOneCta.addClass('-active');
+        }
+    }
+
+    stepOneInputs.on('change', function(){
+
+        if ( !$(this).hasClass('-dirty') ) {
+            $(this).addClass('-dirty');
+            stepOneinputCount++;
+            stepOneValidity();
+        }
+    });
+
+    stepOneCta.click(function(){
+        stepOne.removeClass('-current');
+        stepOne.next().addClass('-current');
+        nextBreadcrumbStep();
+    });
+
+    //Step Two Validation
+    var stepTwo = $('[data-step="1"]');
+    var stepTwoInputs = stepTwo.find('input');
+    var stepTwoCta = stepTwo.find('.home__inscriptions__form__cta');
+    var stepTwovalidLimit = stepTwoInputs.length;
+    var stepTwoinputCount = 0;
+
+
+    function stepTwoValidity() {
+        if (stepTwoinputCount === stepTwovalidLimit - 1) {
+            stepTwoCta.addClass('-active');
+        }
+    }
+
+    stepTwoInputs.on('change', function(){
+
+        if ( !$(this).hasClass('-dirty') ) {
+            $(this).addClass('-dirty');
+            stepTwoinputCount++;
+            stepTwoValidity();
+        }
+    });
+
+    stepTwoCta.click(function(){
+        stepTwo.removeClass('-current');
+        stepTwo.next().addClass('-current');
+        nextBreadcrumbStep();
+    });
+
+    //Step Three Validation
+    var stepThree = $('[data-step="2"]');
+    var stepThreeInputs = stepThree.find('input');
+    var stepThreeCta = stepThree.find('.home__inscriptions__form__cta');
+    var stepThreeinputCount = 0;
+
+
+    function stepThreeValidity() {
+        if (stepThreeinputCount === 1) {
+            stepThreeCta.addClass('-active');
+        }
+    }
+
+    stepThreeInputs.on('change', function(){
+        stepThreeinputCount++;
+        stepThreeValidity();
+    });
+
+    stepThreeCta.click(function(){
+        stepThree.removeClass('-current');
+        stepThree.next().addClass('-current');
+        nextBreadcrumbStep();
+    });
+
+    //Step Four Validation
+    var stepFour = $('[data-step="3"]');
+    var stepFourInputs = stepFour.find('input');
+    var stepFourCta = stepFour.find('.home__inscriptions__form__cta');
+    var stepFourvalidLimit = stepFourInputs.length;
+    var stepFourinputCount = 0;
+
+
+    function stepFourValidity() {
+        if (stepFourinputCount === stepFourvalidLimit - 1) {
+            stepFourCta.addClass('-active');
+        }
+    }
+
+    stepFourInputs.on('change', function(){
+
+        if ( !$(this).hasClass('-dirty') ) {
+            $(this).addClass('-dirty');
+            stepFourinputCount++;
+            stepFourValidity();
+        }
+    });
+
+    stepFourCta.click(function(){
+        stepFour.removeClass('-current');
+        stepFour.next().addClass('-current');
+    });
+}
+
+module.exports = Home;
+
+},{}],8:[function(require,module,exports){
 (function (global){
 // Main javascript entry point
 // Should handle bootstrapping/starting application
@@ -14712,17 +14930,49 @@ global.$ = global.jQuery = require('jquery');
 global._ = require('underscore');
 var Header = require('../_modules/header/header');
 var Slider = require('../_modules/slider/slider');
+var Home = require('./home');
+var Modal = require('./modal');
+
 
 $(function() {
     require('../../bower_components/bootstrap-sass/assets/javascripts/bootstrap.min');
     require('../../bower_components/slick-carousel/slick/slick');
-
+    
     new Header();
     new Slider();
+    new Home();
+    new Modal();
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"../../bower_components/bootstrap-sass/assets/javascripts/bootstrap.min":1,"../../bower_components/slick-carousel/slick/slick":2,"../_modules/header/header":5,"../_modules/slider/slider":6,"jquery":3,"underscore":4}]},{},[7])
+},{"../../bower_components/bootstrap-sass/assets/javascripts/bootstrap.min":1,"../../bower_components/slick-carousel/slick/slick":2,"../_modules/header/header":5,"../_modules/slider/slider":6,"./home":7,"./modal":9,"jquery":3,"underscore":4}],9:[function(require,module,exports){
+'use strict';
+
+// Constructor
+var Modal = function() {
+    var modal = $('.c-modal');
+    var modalTrigger = $('[data-modal]');
+
+    if (modal) {
+        modalTrigger.each(function() {
+            var $this = $(this);
+            var mode = $this.data('modal');
+
+            $this.on('click', function (e) {
+                if( mode === 'open' ) {
+                    modal.addClass('-open');
+                } else if ( mode === 'close' ) {
+                    modal.removeClass('-open');
+                }
+                e.preventDefault();
+            });
+        });
+    }
+};
+
+module.exports = Modal;
+
+},{}]},{},[8])
 
 //# sourceMappingURL=main.js.map

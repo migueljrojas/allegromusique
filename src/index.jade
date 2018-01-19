@@ -2,3 +2,314 @@ extends _layouts/base
 
 block content
     main.home
+        section#home.home__hero
+            .home__hero__cta
+                span._tag Année scolaire
+                span._year 2017 - 2018
+                a._button.-orange(href="#inscriptions")
+                    | Inscriptions ouvertes  
+                    i.material-icons keyboard_arrow_right
+        
+        section#cours.home__cours
+            .container
+                .row.nopadding-xs
+                    each item, index in site.data.home.cours
+                        .col-xs-24.col-sm-12.col-md-6.home__cours__item__col
+                            .home__cours__item.wow.fadeInUp(data-wow-delay="#{(index + 1)/4}s")
+                                .home__cours__item__heading
+                                    if item.mark
+                                        span.home__cours__item__mark= item.mark
+                                    h2.home__cours__item__title= item.name
+                                    p.home__cours__item__age
+                                        |Éveil musical:  
+                                        strong
+                                            |(#{item.age})
+                                .home__cours__item__body
+                                    .home__cours__item__schedule
+                                        each schedule, index in item.schedules
+                                            if item.schedules.length > 1
+                                                .home__cours__item__schedule__switch
+                                                    button(data-target="schedule-#{index + 1}")
+                                                        span
+                                                            |#{index + 1}
+                                                .home__cours__item__schedule__content(data-tab="schedule-#{index + 1}")
+                                                    p.home__cours__item__schedule__day= schedule.day
+                                                    p.home__cours__item__schedule__place!= schedule.place
+                                                    p.home__cours__item__schedule__address= schedule.address
+                                            else 
+                                                .home__cours__item__schedule__content
+                                                    p.home__cours__item__schedule__day= schedule.day
+                                                    p.home__cours__item__schedule__place!= schedule.place
+                                                    p.home__cours__item__schedule__address= schedule.address
+                                    .home__cours__item__desc
+                                        p= item.desc
+                                        button.home__cours__item__desc__show
+                                    .home__cours__item__teacher
+                                        span avec
+                                        p= item.teacher
+                                .home__cours__item__footer
+                                    a._button(href="#inscriptions", data-input=item.name)
+                                        | Je suis intéressé!
+                                        i.material-icons keyboard_arrow_right
+                                        
+        section#lecole.home__lecole
+            .home__lecole__content
+                h2.home__lecole__title.wow.fadeInUp La École
+                p.home__lecole__text.wow.fadeInUp Allegro Musique est une école associative, basée à Genève. Cette école est née de l’envie de mettre en place une formation qui puisse éveiller l’intérêt des plus jeunes pour la musique grâce à une pratique collective.
+                p.home__lecole__text.wow.fadeInUp Tous nos professeurs sont des professionnels diplômés des principales Hautes écoles de musique de Suisse et d'Europe et sont activement impliqués dans la pédagogie musicale de la région.
+
+        section#professeurs.home__professeurs
+            .container
+                .row
+                    .col-xs-24.col-sm-8.col-md-10
+                        h2.home__professeurs__title Nos professeurs
+                        p.home__professeurs__text Nous cherchons à stimuler l’intellect et, ainsi, à améliorer les facultés de perception, la concentration et la mémoire à travers la pratique de la musique. L’applaudissement – source considérable de motivation et de reconnaissance – est un élément indispensable dans notre vision pédagogique, raison pour laquelle tous nos cours aboutissent à une prestation publique sous forme de concert, 2 fois par année, afin d'encourager nos jeunes élèves
+                        p.home__professeurs__text Nos professeurs sont des professionnels diplômés des principales Hautes écoles de musique de Suisse et d'Europe et sont activement impliqués dans la recherche d’une pédagogie musicale qui soit ludique et riche en apprentissage. 
+                    
+                    .col-xs-24.col-sm-8.col-md-7
+                        .home__professeurs__person
+                            .home__professeurs__person__img
+                                img(src="/images/home/yanna.jpg")
+                            .home__professeurs__person__intro
+                                h3.home__professeurs__person__name Yanna Parra Sottas
+                                ul.home__professeurs__person__social
+                                    li
+                                        a(href="http://instagram.com")
+                                            i.fa.fa-instagram
+                                    li
+                                        a(href="http://youtube.com")
+                                            i.fa.fa-youtube
+                                    li
+                                        a(href="http://linkedin.com")
+                                            i.fa.fa-linkedin
+                            .home__professeurs__person__bio
+                                p Née à Caracas, Venezuela, Yana Parra Sottas débute dans la musique au sein de EL SISTEMA puis elle fait des études à Munich, Genève et Bâle. Depuis 2013 elle enseigne à l’Ecole Montessori « La Maison bleue », à Versoix. Depuis 2013, elle est professeure de violoncelle au Conservatoire de Musique de Genève dans le cadre du projet Projet MusicEnsemble.
+                            
+                    .col-xs-24.col-sm-8.col-md-7
+                        .home__professeurs__person
+                            .home__professeurs__person__img
+                                img(src="/images/home/victor.jpg")
+                            .home__professeurs__person__intro
+                                h3.home__professeurs__person__name Victor Hugo Alvarado
+                                ul.home__professeurs__person__social
+                                    li
+                                        a(href="http://instagram.com")
+                                            i.fa.fa-instagram
+                                    li
+                                        a(href="http://youtube.com")
+                                            i.fa.fa-youtube
+                                    li
+                                        a(href="http://linkedin.com")
+                                            i.fa.fa-linkedin
+                            .home__professeurs__person__bio
+                                p Né à Caracas, Venezuela, Victor Alvarado commence le cor au sein de « El Sistema ». Il effectue des études en France (Perpignan) et à Genève où il obtient un Master en Enseignement. C’est sa passion pour l’enseignement qui a poussé Victor à participer dès le début en 2011 dans le projet MusicEnsemble de Meyrin, expérience pédagogique inspirée de « El Sistema ». Depuis 2013 Victor est professeur de cuivres dans l’École Internationale de Genève.
+                                
+        section#inscriptions.home__inscriptions
+            .container
+                .row
+                    .col-xs-24
+                        h2.home__inscriptions__title Formulaire d’inscription
+                        form#inscriptions-form.home__inscriptions__form(action="inscription.php", method="post")
+                            .home__inscriptions__form__breadcrumb
+                                .home__inscriptions__form__breadcrumb__step.-current(data-index="0") 1. 
+                                    span Elève
+                                i.material-icons keyboard_arrow_right
+                                .home__inscriptions__form__breadcrumb__step(data-index="1") 2. 
+                                    span Répondant et Cours
+                                i.material-icons keyboard_arrow_right
+                                .home__inscriptions__form__breadcrumb__step(data-index="2") 3. 
+                                    span Choisissez le cours
+                                i.material-icons keyboard_arrow_right
+                                .home__inscriptions__form__breadcrumb__step(data-index="3") 4. 
+                                    span Paiement
+                            
+                            .home__inscriptions__form__step(data-step="0").-current
+                                .home__inscriptions__form__step__body
+                                    .home__inscriptions__form__group
+                                        input.home__inscriptions__form__input(type="text", name="nom", placeholder="Nom e Prénom")
+                                        label.home__inscriptions__form__label Nom e Prénom
+                                    .home__inscriptions__form__group
+                                        input.home__inscriptions__form__input(type="text", name="adresse", placeholder="Adresse")
+                                        label.home__inscriptions__form__label Adresse
+                                    .home__inscriptions__form__group--half
+                                        .home__inscriptions__form__group
+                                            input.home__inscriptions__form__input(type="text", name="NPA", placeholder="NPA-Localité")
+                                            label.home__inscriptions__form__label NPA-Localité
+                                        .home__inscriptions__form__group
+                                            input.home__inscriptions__form__input(type="text", name="tel", placeholder="Tel")
+                                            label.home__inscriptions__form__label Tel
+                                    .home__inscriptions__form__group--half
+                                        .home__inscriptions__form__group
+                                            input.home__inscriptions__form__input(type="date", name="date", placeholder="NPA-Localité")
+                                            label.home__inscriptions__form__label Date de naissance
+                                        .home__inscriptions__form__group
+                                            .home__inscriptions__form__group--radio
+                                                input.home__inscriptions__form__input(type="radio", name="genre", id="mademoiselle", value="Mademoiselle")
+                                                label.home__inscriptions__form__label--radio(for="mademoiselle") Mademoiselle
+                                            .home__inscriptions__form__group--radio
+                                                input.home__inscriptions__form__input(type="radio", name="genre", id="monsieur", value="Monsieur")
+                                                label.home__inscriptions__form__label--radio(for="monsieur") Monsieur
+                                a.home__inscriptions__form__cta(href="#", data-action="next") Suivant
+                                    i.material-icons keyboard_arrow_right
+                                    
+                            .home__inscriptions__form__step(data-step="1")
+                                .home__inscriptions__form__step__body
+                                    .home__inscriptions__form__group
+                                        input.home__inscriptions__form__input(type="text", name="nom-répondant", placeholder="Nom e Prénom")
+                                        label.home__inscriptions__form__label Nom e Prénom
+                                    .home__inscriptions__form__group
+                                        input.home__inscriptions__form__input(type="text", name="adresse-répondant", placeholder="Adresse")
+                                        label.home__inscriptions__form__label Adresse
+                                    .home__inscriptions__form__group--half
+                                        .home__inscriptions__form__group
+                                            input.home__inscriptions__form__input(type="text", name="NPA-répondant", placeholder="NPA-Localité")
+                                            label.home__inscriptions__form__label NPA-Localité
+                                        .home__inscriptions__form__group
+                                            input.home__inscriptions__form__input(type="text", name="tel-répondant", placeholder="Tel")
+                                            label.home__inscriptions__form__label Tel
+                                    .home__inscriptions__form__group--half
+                                        .home__inscriptions__form__group
+                                            input.home__inscriptions__form__input(type="email", name="email-répondant", placeholder="Email")
+                                            label.home__inscriptions__form__label Email
+                                        .home__inscriptions__form__group
+                                            .home__inscriptions__form__group--radio
+                                                input.home__inscriptions__form__input(type="radio", name="genre-répondant", id="mademoiselle-repondant", value="Mademoiselle")
+                                                label.home__inscriptions__form__label--radio(for="mademoiselle-repondant") Mademoiselle
+                                            .home__inscriptions__form__group--radio
+                                                input.home__inscriptions__form__input(type="radio", name="genre-répondant", id="monsieur-repondant", value="Monsieur")
+                                                label.home__inscriptions__form__label--radio(for="monsieur-repondant") Monsieur
+                                a.home__inscriptions__form__cta(href="#", data-action="next") Suivant
+                                    i.material-icons keyboard_arrow_right
+                                
+                                
+                            .home__inscriptions__form__step(data-step="2")
+                                .home__inscriptions__form__step__body
+                                    .home__inscriptions__form__group--cours
+                                        span Cours
+                                        span Horaire
+                                        span Lieu
+                                        
+                                    .home__inscriptions__form__group--cours
+                                        .home__inscriptions__form__group--radio
+                                            input.home__inscriptions__form__input(type="radio", name="cours", id="curso1", value="Les P’tits Doudous")
+                                            label.home__inscriptions__form__label--radio(for="curso1") Les P’tits Doudous
+                                        span Mercredi de 10h à 10h50
+                                        span École Beaulieu
+                                        
+                                    .home__inscriptions__form__group--cours
+                                        .home__inscriptions__form__group--radio
+                                            input.home__inscriptions__form__input(type="radio", name="cours", id="curso2", value="Les P’tits Poussins - Horario 1")
+                                            label.home__inscriptions__form__label--radio(for="curso2") Les P’tits Poussins
+                                        span Mercredi de 11h à 11h50
+                                        span École Beaulieu
+                                        
+                                    .home__inscriptions__form__group--cours
+                                        .home__inscriptions__form__group--radio
+                                            input.home__inscriptions__form__input(type="radio", name="cours", id="curso3", value="Les P’tits Poussins - Horario 2")
+                                            label.home__inscriptions__form__label--radio(for="curso3") Les P’tits Poussins
+                                        span Mercredi de 10h à 10h50
+                                        span École Geinsendorf
+                                        
+                                    .home__inscriptions__form__group--cours
+                                        .home__inscriptions__form__group--radio
+                                            input.home__inscriptions__form__input(type="radio", name="cours", id="curso4", value="Los Chiquitines")
+                                            label.home__inscriptions__form__label--radio(for="curso4") Los Chiquitines
+                                        span Mercredi de 11h à 11h50
+                                        span École Geinsendorf
+                                        
+                                    .home__inscriptions__form__group--cours
+                                        .home__inscriptions__form__group--radio
+                                            input.home__inscriptions__form__input(type="radio", name="cours", id="curso5", value="Teen Music")
+                                            label.home__inscriptions__form__label--radio(for="curso5") Teen Music
+                                        span Mardi de 18h à 19h
+                                        span École Allobrogues
+                                        
+                                    p.home__inscriptions__form__group--cours__more Pour des cours individuels d’instrument, nous enseignons en privé le piano, le violon, le violoncelle, la guitare, le chant, le cor et la trompette. Pour plus de renseignements, veuillez nous contacter.
+                            
+                                a.home__inscriptions__form__cta(href="#", data-action="next") Suivant
+                                    i.material-icons keyboard_arrow_right
+                            
+                            .home__inscriptions__form__step(data-step="3")
+                                .home__inscriptions__form__step__body
+                                    .home__inscriptions__form__group--half
+                                        .home__inscriptions__form__group
+                                            h3 PRIX
+                                            p.home__inscriptions__form__prix 
+                                                span 320 
+                                                | pour 1 trimestre
+                                            p.home__inscriptions__form__prix 
+                                                span 300 
+                                                | pour un deuxième enfant inscrit
+                                            p.home__inscriptions__form__prix 
+                                                span 50 
+                                                | axe annuelle d’inscription par famille.
+                                        .home__inscriptions__form__group
+                                            p Pour le paiement de vos cours, merci d'attendre une réponse à votre inscription de notre secrétariat (par mail ou par téléphone) vous indiquant le montant exact à verser. Celui-ci varie si vous vous inscrivez en cours d'année (nous déduisons les cours non suivis), si vous avez déjà versé votre taxe d'inscription annuelle ou pas (50.-) et en fonction du nombre d'enfants inscrits par famille (tarif préférentiel).
+                                    h3 Paiement
+                                    .home__inscriptions__form__group--half
+                                        .home__inscriptions__form__group
+                                            .home__inscriptions__form__group--radio
+                                                input.home__inscriptions__form__input(type="radio", name="paiement", id="payment1", value="Bulletin de Versement")
+                                                label.home__inscriptions__form__label--radio(for="payment1") Bulletin de Versement
+                                        .home__inscriptions__form__group
+                                            .home__inscriptions__form__group--radio
+                                                input.home__inscriptions__form__input(type="radio", name="paiement", id="payment2", value="Paypal")
+                                                label.home__inscriptions__form__label--radio(for="payment2") Paypal
+                                        .home__inscriptions__form__group
+                                            input.home__inscriptions__form__input(type="checkbox", name="agreement", id="agreement", value="true")
+                                            label.home__inscriptions__form__label--checkbox(for="agreement")
+                                                a(data-modal="open") Merci de lire attentivement les conditions générales avant de vous inscrire. Elles contiennent des informations importantes.
+                                                    
+                                a.home__inscriptions__form__cta(href="#", data-action="next", id="btn-finaliser") finaliser l'inscription
+                                    i.material-icons keyboard_arrow_right
+                                    
+                        p.home__inscriptions__conditions Places limitées - Inscription possible tout au long de l’année
+                        
+        section#contact.home__contact
+            .container
+                .row
+                    .col-xs-24
+                        h2.home__contact__title Contactez-nous
+                        .row
+                            .col-xs-24.col-sm-12
+                                p.home__contact__data
+                                    i.fa.fa-phone
+                                    span +41 76 679 56 94
+                                p.home__contact__data
+                                    i.fa.fa-envelope-o
+                                    a(href="mailto:info@allegromusique.ch") info@allegromusique.ch
+                                p.home__contact__data
+                                    i.fa.fa-map-marker
+                                    span
+                                        |Rue des Charmilles 16,
+                                        br
+                                        |1203 Genève
+                                
+                                .row
+                                    .col-xs-24.col-sm-16
+                                        .embed-responsive.embed-responsive-16by9
+                                            iframe.embed-responsive-item(src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5522.444206615835!2d6.1295990134776295!3d46.20603653224254!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c64d02053390b%3A0xd02c476be235ff0f!2sRue+des+Charmilles+16%2C+1203+Gen%C3%A8ve%2C+Suiza!5e0!3m2!1ses!2sve!4v1514471885065", allowfullscreen)
+                                    
+                                
+                                    
+                            .col-xs-24.col-sm-12
+                                form.home__contact__form(action="enviar.php", method="post", id="home-contact")
+                                    .home__contact__form__group
+                                        input.home__contact__form__input(type="text", placeholder="Nom", name="name")
+                                    .home__contact__form__group
+                                        input.home__contact__form__input(type="text", placeholder="Email", name="email")
+                                    .home__contact__form__group
+                                        input.home__contact__form__input(type="text", placeholder="Message", name="message")
+                                    .home__contact__form__group
+                                        button._button(type="submit") Send
+            
+            
+    .c-modal
+        a.c-modal__backdrop(data-modal="close")
+        a.c-modal__close._button(data-modal="close")
+            i.fa.fa-times
+        .c-modal__container
+            .c-modal__text
+                p L'école organise ses cours et les horaires des professeurs, ainsi que de leurs assistants, en fonction du nombre d'enfants inscrits.  Ainsi, toute inscription - que vous aurez effectuée par mail ou courrier postal - sera définitive et l'écolage sera dû.
+                p Les annulations d'inscription pour des raisons de santé sont admises (sur présentation d'un certificat médical).
+                p L'inscription est trimestrielle. Sans nouvelles de votre part, celle-ci est automatiquement reconduite au trimestre suivant. Pour toute désinscription, merci de nous prévenir par écrit (mail) au minimum 15 jours avant le début du nouveau trimestre, sans quoi le montant de ce dernier nous sera dû.

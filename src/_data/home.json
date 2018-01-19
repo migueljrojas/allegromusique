@@ -1,3 +1,62 @@
 {
-    
+    "cours":[
+        {
+            "name":"Les P’tits Doudous",
+            "age":"âge de 3 à 4 ans",
+            "teacher":"Yana Parra Sottas",
+            "schedules":[
+                {
+                    "day":"Mercredi de 10h à 10h50.",
+                    "place":"École Beaulieu-Principal,<br>salle de rythmique.",
+                    "address":"22, Rue du Grand-Pré, 1202 Genève"
+                }
+            ],
+            "desc":"Le groupe des « P’tis Doudous » accueille des enfants de 3 à 4 ans. Ceux-ci découvriront la musique à travers les sons, les rythmes et le mouvement."
+        },
+        {
+            "name":"Les P’tits Poussins",
+            "age":"âge de 5 à 6 ans",
+            "teacher":"Yana Parra Sottas | Victor Alvarado",
+            "schedules":[
+                {
+                    "day":"Mercredi de 11h à 11h50.",
+                    "place":"École Beaulieu-Principal,<br>salle de rythmique.",
+                    "address":"22, Rue du Grand-Pré, 1202 Genève"
+                },
+                {
+                    "day":"Mercredi de 10h à 10h50.",
+                    "place":"École Geinsendorf,<br>salle de jeux.",
+                    "address":"56, Rue du Lyon, 1203 Genève"
+                }
+            ],
+            "desc":"Le groupe des « P’tits Poussins » apprendraà connaitre la musique et les bases simples du rythme, ainsi qu'à reconnaitre des rythmes écrits. Les enfants bougeront et éveilleront leur curiosité pour les différents instruments. La sensibilité pour la musique sera un pilier important dans ce cours."
+        },
+        {
+            "mark":"(Nouveau à Genève)",
+            "name":"Los Chiquitines",
+            "age":"âge de 4 à 6 ans",
+            "teacher":"Victor Alvarado",
+            "schedules":[
+                {
+                    "day":"Mercredi de 11h à 11h50.",
+                    "place":"École Geinsendorf,<br>salle de jeux.",
+                    "address":"56, Rue du Lyon, 1203 Genève"
+                }
+            ],
+            "desc":"Cours d’éveil musical et culture latino-américaine 100 % en espagnol. La sensibilité pour la musique sera un pilier important dans ce cours."
+        },
+        {
+            "name":"Teen music",
+            "age":"élèves de 12 à 17 ans",
+            "teacher":"Yana Parra Sottas",
+            "schedules":[
+                {
+                    "day":"Mardi de 18h à 19h",
+                    "place":"École Allobroges, salle de jeux.",
+                    "address":"Rue des Allobroges 33A. 1227 Carouge"
+                }
+            ],
+            "desc":"Allegro Musique lance cette année Teen Music, c'est un ensemble de musique à géométrie variable, dans lequel nous explorons différents styles musicaux. Les morceaux seront choisi au début du trimestre, en fonction des goûts musicaux des participants. Du classique? Du rap? Du hip-hop? De la musique de variété? Ou même encore pourquoi ne pas composer notre propre morceau? Prends ton instrument ou ta voix et rejoins nous dans cette aventure!."
+        }
+    ]
 }

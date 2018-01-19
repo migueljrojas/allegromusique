@@ -1,2 +1,28 @@
 header.header
-    
+        .header__logo.wow.fadeInDown
+            a(href="/")
+                h1
+                    img(src="/images/logo.svg", title="Allegro Musique - Association pour l'enseignement musical", alt="Allegro Musique - Association pour l'enseignement musical")
+                            
+        .header__hamburguer
+            span
+            span
+            span
+                
+        nav.header__nav
+            ul.header__menu
+                each item in site.data.header
+                    li
+                        a(href=item.url)= item.name
+                        if item.submenu
+                            ul.header__submenu
+                                each link in item.submenu
+                                    li
+                                        a(href=link.url)= link.name
+                                        
+            ul.header__nav__social
+                each red in site.data.social
+                    li
+                        a(href=red.url, target="_blank")
+                            i(class="fa fa-#{red.name}")
+                

@@ -1,6 +1,26 @@
 [
     {
-        "name":"",
-        "url":""
+        "name":"Accueil",
+        "url":"#home"
+    },
+    {
+        "name":"Les Cours",
+        "url":"#cours"
+    },
+    {
+        "name":"L’école",
+        "url":"#ecole"
+    },
+    {
+        "name":"Nos Professeurs",
+        "url":"#professeurs"
+    },
+    {
+        "name":"Inscriptions",
+        "url":"#inscriptions"
+    },
+    {
+        "name":"Contact",
+        "url":"#contact"
     }
 ]

@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>PROYECT TITLE</title>
+  <title>Allegro musique - Cours d'evéil musical à Genève</title>
   <meta name="description" content="A new Yeogurt application">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./styles/main.css">
@@ -49,8 +49,9 @@
         </li>
       </ul>
       <ul class="header__nav__social">
-        <li><a href="https://www.facebook.com/allegromusiquegeneve/" target="_blank"><i class="fa fa-facebook"></i></a></li>
-        <li><a href="https://www.instagram.com/allegromusique/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+        <li><a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+        <li><a href="https://www.linkedin.com" target="_blank"><i class="fa fa-linkedin"></i></a></li>
       </ul>
     </nav>
   </header>
@@ -230,7 +231,7 @@
         <div class="row">
           <div class="col-xs-24">
             <h2 class="home__inscriptions__title">Formulaire d’inscription</h2>
-            <form id="inscriptions-form" action="inscription.php" method="post" class="home__inscriptions__form">
+            <form action="inscripcion.php" method="post" id="inscriptions-form" class="home__inscriptions__form">
               <div class="home__inscriptions__form__breadcrumb">
                 <div data-index="0" class="home__inscriptions__form__breadcrumb__step -current">1. <span>Elève</span></div><i class="material-icons">keyboard_arrow_right</i>
                 <div data-index="1" class="home__inscriptions__form__breadcrumb__step">2. <span>Répondant et Cours</span></div><i class="material-icons">keyboard_arrow_right</i>
@@ -381,7 +382,9 @@
                       <label for="agreement" class="home__inscriptions__form__label--checkbox"><a data-modal="open">Merci de lire attentivement les conditions générales avant de vous inscrire. Elles contiennent des informations importantes.</a></label>
                     </div>
                   </div>
-                </div><a href="#" data-action="next" id="btn-finaliser" class="home__inscriptions__form__cta">finaliser l'inscription<i class="material-icons">keyboard_arrow_right</i></a>
+                </div><a href="#" data-action="next" id="btn-finaliser" class="home__inscriptions__form__cta">finaliser
+                  l'inscription<i
+                      class="material-icons">keyboard_arrow_right</i></a>
               </div>
             </form>
             <p class="home__inscriptions__conditions">Places limitées - Inscription possible tout au long de l’année</p>
@@ -408,15 +411,15 @@
                 </div>
               </div>
               <div class="col-xs-24 col-sm-12">
-                <form action="enviar.php" method="post" id="home-contact" class="home__contact__form">
+                <form action="enviar.php" method="post"  class="home__contact__form" id="home-contact">
                   <div class="home__contact__form__group">
-                    <input type="text" placeholder="Nom" name="name" class="home__contact__form__input">
+                    <input type="text" placeholder="Nom" class="home__contact__form__input" name="name">
                   </div>
                   <div class="home__contact__form__group">
-                    <input type="text" placeholder="Email" name="email" class="home__contact__form__input">
+                    <input type="text" placeholder="Email" class="home__contact__form__input" name="email">
                   </div>
                   <div class="home__contact__form__group">
-                    <input type="text" placeholder="Message" name="message" class="home__contact__form__input">
+                    <input type="text" placeholder="Message" class="home__contact__form__input" name="message">
                   </div>
                   <div class="home__contact__form__group">
                     <button type="submit" class="_button">Send</button>
@@ -429,46 +432,39 @@
       </div>
     </section>
   </main>
-  <div class="c-modal"><a data-modal="close" class="c-modal__backdrop"></a><a data-modal="close" class="c-modal__close _button"><i class="fa fa-times"></i></a>
-    <div class="c-modal__container">
-      <div class="c-modal__text">
-        <p>L'école organise ses cours et les horaires des professeurs, ainsi que de leurs assistants, en fonction du nombre d'enfants inscrits.  Ainsi, toute inscription - que vous aurez effectuée par mail ou courrier postal - sera définitive et l'écolage sera dû.</p>
-        <p>Les annulations d'inscription pour des raisons de santé sont admises (sur présentation d'un certificat médical).</p>
-        <p>L'inscription est trimestrielle. Sans nouvelles de votre part, celle-ci est automatiquement reconduite au trimestre suivant. Pour toute désinscription, merci de nous prévenir par écrit (mail) au minimum 15 jours avant le début du nouveau trimestre, sans quoi le montant de ce dernier nous sera dû.</p>
-      </div>
-    </div>
-  </div>
   <footer class="footer"></footer>
   <script src="./scripts/main.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/wow/0.1.12/wow.min.js"></script>
   <script>new WOW().init();</script>
-  <script>
-    jQuery(document).ready(function () {
-       
-       //Contact Form
-      var form = jQuery('#home-contact');
-      var success =
-          '<p class="h1">Merci pour nous contacter!</p><p class="h3">Nous répondrons sous peu :)</p>';
-      if(window.location.href.indexOf("sent") > -1) {
-          form.addClass('-result');
-          form.html(success);
-          jQuery("html, body").animate({ scrollTop: jQuery(document).height() }, 1000);
-      }
-      
-      //Inscription Form
-      document.getElementById("btn-finaliser").onclick = function() {
-          document.getElementById("inscriptions-form").submit();
-      }
-      
-      var form2 = jQuery('#inscriptions-form');
-      var success2 =
-          '<p class="h1">Merci pour votre inscription!</p><p class="h3">Nous répondrons sous peu :)</p>';
-      if(window.location.href.indexOf("envoye") > -1) {
-          form2.addClass('-result');
-          form2.html(success2);
-          var position = jQuery('#inscriptions').offset().top;
-          jQuery("html, body").animate({ scrollTop: position }, 1000);
-      }
-    });
+  <script type="text/javascript">
+      jQuery(document).ready(function () {
+
+          //Contact Form
+          var form = jQuery('#home-contact');
+          var success =
+              '<p class="h1">Merci pour nous contacter!</p><p class="h3">Nous répondrons sous peu :)</p>';
+
+          if(window.location.href.indexOf("sent") > -1) {
+              form.addClass('-result');
+              form.html(success);
+              jQuery("html, body").animate({ scrollTop: jQuery(document).height() }, 1000);
+          }
+
+          //Inscription Form
+          document.getElementById("btn-finaliser").onclick = function() {
+              document.getElementById("inscriptions-form").submit();
+          }
+
+          var form2 = jQuery('#inscriptions-form');
+          var success2 =
+              '<p class="h1">Merci pour votre inscription!</p><p class="h3">Nous répondrons sous peu :)</p>';
+
+          if(window.location.href.indexOf("envoye") > -1) {
+              form2.addClass('-result');
+              form2.html(success2);
+              var position = jQuery('#inscriptions').offset().top;
+              jQuery("html, body").animate({ scrollTop: position }, 1000);
+          }
+      });
   </script>
 </body></html>
